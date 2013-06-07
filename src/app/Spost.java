@@ -26,6 +26,12 @@ public class Spost {
         }
     }
 
+    public Spost(char dov, int pod, char p){
+        this.dov = dov;
+        this.pod = pod;
+        this.p = p;
+    }
+    
     public Spost(int p1, int p2) {
         random = new Random();
         int znak = random.nextInt(2);
@@ -65,23 +71,64 @@ public class Spost {
             }
         }
     }
+    public Spost(int n, char c) {
+        if (n == 0) {
+            dov = ' ';
+            pod = 0;
+            p = '?';
+        } else {
+            random = new Random();
+            int znak = random.nextInt(2);
+            if (znak == 1) {
+                dov = 'r';
+            } else {
+                dov = 'l';
+            }
+            pod = random.nextInt(20 / n) + (int) (15 / n);
+            p = c;
+        }
+    }
 
-    public char getDov(){
+    public void reset(int n){
+        if (n == 0) {
+            dov = ' ';
+            pod = 0;
+            p = '?';
+        } else {
+            random = new Random();
+            int znak = random.nextInt(2);
+            if (znak == 1) {
+                dov = 'r';
+            } else {
+                dov = 'l';
+            }
+            pod = random.nextInt(20 / n) + (int) (15 / n);
+            znak = random.nextInt(2);
+            if (znak == 1) {
+                p = '+';
+            } else {
+                p = '-';
+            }
+        }
+    }
+    
+    public char getDov() {
         return dov;
     }
-    
-    public int getPod(){
+
+    public int getPod() {
         return pod;
     }
-    
-    public char getP(){
+
+    public char getP() {
         return p;
     }
-    
+
     public String toString() {
         String res = "";
-        if(p=='?')
+        if (p == '?') {
             return "?";
+        }
         if (dov == 'r') {
             res = "П ";
         } else {

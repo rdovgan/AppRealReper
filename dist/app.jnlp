@@ -11,8 +11,23 @@
   </resources>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="app.jar" size="23684" download="eager" />
+    <jar href="app.jar" size="54668" download="eager" />
+    <jar href="lib/commons-codec-1.5.jar" size="73098" download="eager" />
+    <jar href="lib/commons-logging-1.1.jar" size="52915" download="eager" />
+    <jar href="lib/deploy.jar" size="4230196" download="eager" />
+    <jar href="lib/dom4j-1.6.1.jar" size="313898" download="eager" />
     <jar href="lib/hsqldb.jar" size="1423646" download="eager" />
+    <jar href="lib/javaws.jar" size="894198" download="eager" />
+    <jar href="lib/jfxrt.jar" size="15092678" download="eager" />
+    <jar href="lib/junit-3.8.1.jar" size="121070" download="eager" />
+    <jar href="lib/log4j-1.2.13.jar" size="358180" download="eager" />
+    <jar href="lib/plugin.jar" size="1905758" download="eager" />
+    <jar href="lib/poi-3.9-20121203.jar" size="1869113" download="eager" />
+    <jar href="lib/poi-ooxml-3.9-20121203.jar" size="936648" download="eager" />
+    <jar href="lib/poi-ooxml-schemas-3.9-20121203.jar" size="4802621" download="eager" />
+    <jar href="lib/poi-scratchpad-3.9-20121203.jar" size="1226511" download="eager" />
+    <jar href="lib/stax-api-1.0.1.jar" size="26514" download="eager" />
+    <jar href="lib/xmlbeans-2.3.0.jar" size="2666695" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="app" >
     <param name="requiredFXVersion" value="2.2+"/>

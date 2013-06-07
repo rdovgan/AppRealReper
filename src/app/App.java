@@ -1,15 +1,24 @@
 package app;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
-import java.util.Random;
+import javax.swing.JFrame;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
  * @author Roma
  */
 public class App {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException, FileNotFoundException {
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException, FileNotFoundException, IOException {
 //        try {
 //            Class.forName("org.hsqldb.jdbcDriver");
 //            System.err.println("Драйвер БД загружен.");
@@ -29,11 +38,11 @@ public class App {
 //        try {
 //            Statement statement = connection.createStatement();
 //            String query;
-            //start create table
-//            query = "CREATE TABLE strilba (ZAR VARCHAR(5) NOT NULL,DAL INTEGER NOT NULL,P INTEGER NOT NULL,DX DECIMAL(3,1) NOT NULL,VD DECIMAL(3,1),Z DECIMAL(3,1))";
-//            statement.execute(query);
+// //           start create table
+////            query = "CREATE TABLE popr (ZAR VARCHAR(5) NOT NULL, P INTEGER NOT NULL, E INTEGER NOT NULL, H VARCHAR(2) NOT NULL, Z INTEGER)";
+////            statement.execute(query);
 //            BufferedReader input = null;
-//            String filename = "d:\\Диск Google\\VK\\tables\\z.txt";
+//            String filename = "d:\\Диск Google\\VK\\tables\\table.txt";
 //            try {
 //                input = new BufferedReader(new FileReader(filename));
 //            } catch (FileNotFoundException e) {
@@ -49,20 +58,25 @@ public class App {
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
+//            int e = 10;
 //            for (String tmp : list) {
 //                String[] split = tmp.split("\t");
-//                if(split.length>9){
-//                    query = "INSERT INTO STRILBA VALUES('z',"+split[0]+","+split[3]+","+split[5]+","+split[6]+","+split[9]+")";
+//                int n = split.length;
+//                int p = 20;
+//                for(int i=0; i<n; i++){
+//                    query = "INSERT INTO POPR VALUES('4',"+p+","+e+",'-',"+split[i]+")";
 //                    statement.execute(query);
+//                    p += 20;
 //                }
+//                e += 10;
 //            }
-            //end create table
-//            query = "SELECT zar, dal, p, dx, vd, z FROM strilba";
+//  //          end create table
+//            query = "SELECT zar, p, e, h, z FROM popr";
 //            ResultSet resultSet = statement.executeQuery(query);
 //            while (resultSet.next()) {
 //                System.out.println(resultSet.getString(1) + " " + resultSet.getInt(2) + " "
-//                        + resultSet.getInt(3) + " " + resultSet.getDouble(4) + " "
-//                        + resultSet.getDouble(5)+" "+resultSet.getDouble(6));
+//                        + resultSet.getInt(3) + " " + resultSet.getString(4) + " "
+//                        + resultSet.getInt(5));
 //            }
 //            query = "SHUTDOWN";
 //            statement.execute(query);
@@ -71,10 +85,34 @@ public class App {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        Spost s1,s2,s3;
-        s1 = new Spost(new Random().nextInt(5));
-        s2 = new Spost(new Random().nextInt(5));
-        s3 = new Spost(new Random().nextInt(5));
-        System.out.println(s1+"\n"+s2+"\n"+s3);
+//DOC start
+//        XWPFDocument document = new XWPFDocument();
+//        XWPFParagraph para = document.createParagraph();
+//        para.setAlignment(ParagraphAlignment.CENTER);
+//        XWPFRun run = para.createRun();
+//        run.setBold(true);
+//        run.setFontSize(36);
+//        run.setText("Apache POI works well!");
+//        XWPFParagraph para2 = document.createParagraph();
+//        run = para2.createRun();
+//        run.setText("\tApache POI is a Java library for working with MS Office documents."
+//                + " Apache POI has a mature interface to handle MS Excel files."
+//                + " The libraries for working with word and powerpoint files is sufficient, but evolving.");
+//        //Creates a table
+//        XWPFTable tab = document.createTable();
+//        XWPFTableRow row = tab.getRow(0);
+//        row.getCell(0).setText("Sl. No.");
+//        row.addNewTableCell().setText("Name");
+//        row.addNewTableCell().setText("Address");
+//
+//        row = tab.createRow();
+//        row.getCell(0).setText("1.");
+//        row.getCell(1).setText("Raman");
+//        row.getCell(2).setText("Pondicherry");
+//
+//        document.write(new FileOutputStream("1.docx"));
+        //DOC end
+        JFrame j = new MainFrame();
+        j.setVisible(true);
     }
 }
