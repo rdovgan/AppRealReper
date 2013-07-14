@@ -14,7 +14,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 
 /**
  *
- * @author Roma
+ * @author Roma Dovgan
  */
 public class App {
 

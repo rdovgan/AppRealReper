@@ -1,0 +1,25 @@
+        XWPFDocument document = new XWPFDocument();
+        XWPFParagraph para = document.createParagraph();
+        para.setAlignment(ParagraphAlignment.CENTER);
+        XWPFRun run = para.createRun();
+        run.setBold(true);
+        run.setFontSize(36);
+        run.setText("Apache POI works well!");
+        XWPFParagraph para2 = document.createParagraph();
+        run = para2.createRun();
+        run.setText("\tApache POI is a Java library for working with MS Office documents."
+                + " Apache POI has a mature interface to handle MS Excel files."
+                + " The libraries for working with word and powerpoint files is sufficient, but evolving.");
+        //Creates a table
+        XWPFTable tab = document.createTable();
+        XWPFTableRow row = tab.getRow(0);
+        row.getCell(0).setText("Sl. No.");
+        row.addNewTableCell().setText("Name");
+        row.addNewTableCell().setText("Address");
+
+        row = tab.createRow();
+        row.getCell(0).setText("1.");
+        row.getCell(1).setText("Raman");
+        row.getCell(2).setText("Pondicherry");
+
+        document.write(new FileOutputStream("1.docx"));

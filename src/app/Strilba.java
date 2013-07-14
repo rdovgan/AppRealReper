@@ -14,9 +14,9 @@ public class Strilba {
     public Strilba() throws SQLException {
         id = new InputData();
         sp = new Spost();
-        p = id.P();
-        rv = id.RV();
-        dov = id.DVA();
+        p = id.getPr();
+        rv = id.getRV();
+        dov = id.getDVA();
         pDov = new Angle(0);
     }
 
@@ -47,25 +47,25 @@ public class Strilba {
     public void doCorrect(Spost sp, int d) {
         int dp;
         if (d == -1) {
-            dp = (int) (id.VD() / id.DXT());
+            dp = (int) (id.getVD() / id.getDXT());
         } else 
-        if(d==-2){dp = (int)((100-id.VD())/id.DXT());}
+        if(d==-2){dp = (int)((100-id.getVD())/id.getDXT());}
         else{
-            dp = (int) (d / id.DXT());
+            dp = (int) (d / id.getDXT());
         }
         if (sp.getP() == '+') {
             dp = -dp;
         }
         p += dp;
-        double ddov1 = (int) (d * id.KK().get());
-        if (id.ROZM() == 'r') {
+        double ddov1 = (int) (d * id.getKK().get());
+        if (id.getRozm() == 'r') {
             if (sp.getP() == '-') {
                 ddov1 = -ddov1;
             }
         } else if (sp.getP() == '+') {
             ddov1 = -ddov1;
         }
-        double ddov2 = sp.pod * id.KV();
+        double ddov2 = sp.pod * id.getKV();
         if (sp.getDov() == 'r') {
             ddov2 = -ddov2;
         }

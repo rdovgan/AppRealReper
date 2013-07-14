@@ -9,20 +9,20 @@ import java.util.Random;
 
 public class InputData {
 
-    private int Dt;
+    private int dalt;
     private Angle dt;
-    private Angle Aon;
-    private int Rx;
-    private int Ry;
-    private int Rh;
-    private int VPx;
-    private int VPy;
-    private int VPh;
-    private int KSPx;
-    private int KSPy;
-    private int Dk;
-    private Angle AR;
-    private int Rn;
+    private Angle aon;
+    private int rx;
+    private int ry;
+    private int rh;
+    private int vpx;
+    private int vpy;
+    private int vph;
+    private int kspx;
+    private int kspy;
+    private int dalk;
+    private Angle ar;
+    private int rn;
     private String par;
     private int p1;
     private int p2;
@@ -55,35 +55,35 @@ public class InputData {
         random = new Random();
         openCon();
         //Дт і dт
-        Dt = random.nextInt(5000) + 5000;
+        dalt = random.nextInt(5000) + 5000;
         dt = new Angle(random.nextInt(6) - 3 + random.nextInt(100) / 100.);
         //Аон
-        Aon = new Angle(random.nextInt(60));
-        if ((Aon.get() % 15 > 5) && (Aon.get() % 15 < 10)) {
-            Aon.set(Aon.get() + 7);
+        aon = new Angle(random.nextInt(60));
+        if ((aon.get() % 15 > 5) && (aon.get() % 15 < 10)) {
+            aon.set(aon.get() + 7);
         }
         //R (x,y,h,n)
-        Rx = random.nextInt(7000) * 10 + 30000;
-        Ry = random.nextInt(7000) * 10 + 30000;
-        Rh = random.nextInt(150) + 80;
-        Rn = random.nextInt(20);
+        rx = random.nextInt(7000) * 10 + 30000;
+        ry = random.nextInt(7000) * 10 + 30000;
+        rh = random.nextInt(150) + 80;
+        rn = random.nextInt(20);
         //пар.
         par = random.nextInt(40) + 1 + "-" + random.nextInt(100) + "-" + random.nextInt(100);
         //ВП (x,y,h)
-        VPx = Rx - (int) (Dt * Math.cos((360 + dt.getDigr()) * Math.PI / 180.) / 5) * 5;
-        VPy = Ry - (int) (Dt * Math.sin((360 + dt.getDigr()) * Math.PI / 180.) / 5) * 5;
-        VPh = random.nextInt(140) - 70 + Rh;
+        vpx = rx - (int) (dalt * Math.cos((360 + dt.getDigr()) * Math.PI / 180.) / 5) * 5;
+        vpy = ry - (int) (dalt * Math.sin((360 + dt.getDigr()) * Math.PI / 180.) / 5) * 5;
+        vph = random.nextInt(140) - 70 + rh;
         //Дк, АR
-        Dk = random.nextInt(2000) + 2000;
-        AR = new Angle(Aon.get() + random.nextInt(600) / 100. - 3);
+        dalk = random.nextInt(2000) + 2000;
+        ar = new Angle(aon.get() + random.nextInt(600) / 100. - 3);
         //КСП (x,y)
-        KSPx = Rx - (int) (Dk * Math.cos((360 + AR.getDigr()) * Math.PI / 180.) / 5) * 5;
-        KSPy = Ry - (int) (Dk * Math.sin((360 + AR.getDigr()) * Math.PI / 180.) / 5) * 5;
+        kspx = rx - (int) (dalk * Math.cos((360 + ar.getDigr()) * Math.PI / 180.) / 5) * 5;
+        kspy = ry - (int) (dalk * Math.sin((360 + ar.getDigr()) * Math.PI / 180.) / 5) * 5;
         //p - дальність
         //d - попроавки на дальність
         //s - поправки на зміщення
-        p1 = (int) (Dt / 1000 - random.nextInt(2) - 1) * 1000;
-        p3 = (int) (Dt / 1000 + random.nextInt(2) + 2) * 1000;
+        p1 = (int) (dalt / 1000 - random.nextInt(2) - 1) * 1000;
+        p3 = (int) (dalt / 1000 + random.nextInt(2) + 2) * 1000;
         p2 = (int) ((p1 + p3) / 2000) * 1000;
         d1 = random.nextInt(10) * 5 + 100;
         d2 = d1 + random.nextInt(10) * 5 + 20;
@@ -96,7 +96,7 @@ public class InputData {
         int pd1, pd2;
         Angle pa1, pa2;
         double k, b;
-        if (Dt < p2) {
+        if (dalt < p2) {
             daln1 = p1;
             daln2 = p2;
             pd1 = d1;
@@ -113,32 +113,32 @@ public class InputData {
         }
         k = (daln1 - daln2) / (pd1 - pd2);
         b = daln2 - pd2 * k;
-        deltaD = (int) ((Dt - b) / k);
+        deltaD = (int) ((dalt - b) / k);
         k = (daln1 - daln2) / (pa1.get() - pa2.get());
         b = daln2 - pa2.get() * k;
-        deltad = new Angle((Dt - b) / k);
+        deltad = new Angle((dalt - b) / k);
         //Дв, dв
-        Dv = Dt + deltaD;
+        Dv = dalt + deltaD;
         dv = new Angle(dt.get() + deltad.get());
         zar = getZar(Dv);
         dxt = getDxt(Dv);
         p = getP(Dv);
-        kv = Math.round(10.0 * Dk / Dt) / 10.0;
-        pz = new Angle(Math.round(10.0 * (AR.get() - (Aon.get() + dt.get()))) / 10.0);
-        kk = new Angle((double) (pz.get() / (Dt / 100.0)));
-        e = new Angle(Math.round((Rh - VPh) / (Dt / 1000.)) / 100.);
+        kv = Math.round(10.0 * dalk / dalt) / 10.0;
+        pz = new Angle(Math.round(10.0 * (ar.get() - (aon.get() + dt.get()))) / 10.0);
+        kk = new Angle((double) (pz.get() / (dalt / 100.0)));
+        e = new Angle(Math.round((rh - vph) / (dalt / 1000.)) / 100.);
         vd = getVd(Dv);
         rv = getRv();
-        if (Ry - KSPy != 0) {
-            k = (Rx - KSPx) / (Ry - KSPy);
+        if (ry - kspy != 0) {
+            k = (rx - kspx) / (ry - kspy);
         } else {
             k = 1;
             System.err.println("/ by 0 in finding 'k'");
         }
-        b = KSPx - KSPy * k;
+        b = kspx - kspy * k;
         double tx;
-        tx = (VPy - b) / k;
-        if (tx < VPx) {
+        tx = (vpy - b) / k;
+        if (tx < vpx) {
             rozm = 'r';
         } else {
             rozm = 'l';
@@ -247,7 +247,7 @@ public class InputData {
 
         int z = 0;
         char h;
-        if (Rh - VPh > 0) {
+        if (rh - vph > 0) {
             h = '+';
         } else {
             h = '-';
@@ -265,7 +265,7 @@ public class InputData {
     public Angle getA() throws SQLException {
         int z = 0;
         char h;
-        if (Rh - VPh > 0) {
+        if (rh - vph > 0) {
             h = '+';
         } else {
             h = '-';
@@ -316,143 +316,143 @@ public class InputData {
         return z;
     }
 
-    public double DXT() {
+    public double getDXT() {
         return dxt;
     }
 
-    public int P() {
+    public int getPr() {
         return p;
     }
 
-    public Angle KK() {
+    public Angle getKK() {
         return kk;
     }
 
-    public double KV() {
+    public double getKV() {
         return kv;
     }
 
-    public int DV() {
+    public int getDV() {
         return Dv;
     }
 
-    public Angle DVA() {
+    public Angle getDVA() {
         return dv;
     }
 
-    public Angle RV() {
+    public Angle getRV() {
         return rv;
     }
 
-    public char ROZM() {
+    public char getRozm() {
         return rozm;
     }
 
-    public double VD() {
+    public double getVD() {
         return vd;
     }
 
-    public int RN() {
-        return Rn;
+    public int getRN() {
+        return rn;
     }
 
-    public int DT() {
-        return Dt;
+    public int getDT() {
+        return dalt;
     }
 
-    public Angle dT() {
+    public Angle getDovT() {
         return dt;
     }
 
-    public int RX() {
-        return Rx;
+    public int getRX() {
+        return rx;
     }
 
-    public int RY() {
-        return Ry;
+    public int getRY() {
+        return ry;
     }
 
-    public int RH() {
-        return Rh;
+    public int getRH() {
+        return rh;
     }
 
-    public int VPX() {
-        return VPx;
+    public int getVPX() {
+        return vpx;
     }
 
-    public int VPY() {
-        return VPy;
+    public int getVPY() {
+        return vpy;
     }
 
-    public int VPH() {
-        return VPh;
+    public int getVPH() {
+        return vph;
     }
 
-    public Angle ON() {
-        return Aon;
+    public Angle getON() {
+        return aon;
     }
 
-    public int KSPX() {
-        return KSPx;
+    public int getKSPX() {
+        return kspx;
     }
 
-    public int KSPY() {
-        return KSPy;
+    public int getKSPY() {
+        return kspy;
     }
 
-    public int D1() {
+    public int getD1() {
         return d1;
     }
 
-    public int D2() {
+    public int getD2() {
         return d2;
     }
 
-    public int D3() {
+    public int getD3() {
         return d3;
     }
 
-    public int P1() {
+    public int getP1() {
         return p1;
     }
 
-    public int P2() {
+    public int getP2() {
         return p2;
     }
 
-    public int P3() {
+    public int getP3() {
         return p3;
     }
 
-    public Angle S1() {
+    public Angle getS1() {
         return s1;
     }
 
-    public Angle S2() {
+    public Angle getS2() {
         return s2;
     }
 
-    public Angle S3() {
+    public Angle getS3() {
         return s3;
     }
 
-    public String RPAR() {
+    public String getRPar() {
         return par;
     }
 
-    public int DK() {
-        return Dk;
+    public int getDK() {
+        return dalk;
     }
 
-    public Angle AR() {
-        return AR;
+    public Angle getAR() {
+        return ar;
     }
 
-    public Angle E() {
+    public Angle getE() {
         return e;
     }
 
-    public String STRZAR() {
+    public String zarToStr() {
         switch (zar) {
             case '1':
                 return "1-й";
@@ -470,7 +470,7 @@ public class InputData {
         return "";
     }
 
-    public Angle PZ() {
+    public Angle getPZ() {
         return pz;
     }
 
@@ -501,10 +501,10 @@ public class InputData {
     }
 
     public String toString() {
-        return "Дт = " + Dt + "\tdт = ОН" + dt.toZ() + "\nAон = " + Aon + "\tZar = " + zar + " \tΔХтис = " + dxt + "\nRx = " + Rx + "\tRy = " + Ry
-                + "\tRh = " + Rh + "\nВПx = " + VPx + "\tВПy = " + VPy + "\tВПh = " + VPh
-                + "\nКСПx = " + KSPx + "\tКСПy = " + KSPy + "\nДк = " + Dk + "\tAR = "
-                + AR + "\tN = " + Rn + "\tpar = " + par + "\n\t" + p1 + "\t" + p2 + "\t" + p3
+        return "Дт = " + dalt + "\tdт = ОН" + dt.toZ() + "\nAон = " + aon + "\tZar = " + zar + " \tΔХтис = " + dxt + "\nRx = " + rx + "\tRy = " + ry
+                + "\tRh = " + rh + "\nВПx = " + vpx + "\tВПy = " + vpy + "\tВПh = " + vph
+                + "\nКСПx = " + kspx + "\tКСПy = " + kspy + "\nДк = " + dalk + "\tAR = "
+                + ar + "\tN = " + rn + "\tpar = " + par + "\n\t" + p1 + "\t" + p2 + "\t" + p3
                 + "\n\t" + d1 + "\t" + d2 + "\t" + d3 + "\n\t" + s1.toZ() + "\t" + s2.toZ() + "\t" + s3.toZ()
                 + "\nΔД = " + deltaD + "\tΔd = " + deltad.toZ() + "\nДв = " + Dv + "\tdВ = " + dv.toZ() + "\nП = " + p + "\tПЗ = " + pz
                 + "\nKв = " + kv + "\tКк = " + kk + "\tε = " + e + "\tВд = " + vd + "\nРв = " + rv;
